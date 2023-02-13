@@ -1,24 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import './App.css';
+import ModalConfirm from "./screen/ModalConfirm";
+import PincodeLoginScreen from "./screen/PincodeLoginScreen";
+
+import { AiFillAlert } from "react-icons/ai";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+      {/* <PincodeLoginScreen/> */}
+      <ModalConfirm bodyText="Etes vous certain de vouloir supprimer cette ligne ?" buttonPosition="" TextIcon={AiFillAlert}/>
     </div>
   );
 }
