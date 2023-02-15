@@ -1,16 +1,32 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import './App.css';
-import ModalConfirm from "./screen/ModalConfirm";
-import PincodeLoginScreen from "./screen/PincodeLoginScreen";
 
-import { AiFillAlert } from "react-icons/ai";
+import ModalConfirm from "./screen/ModalConfirm";
+import "./App.css";
+// import PincodeLoginScreen from "./screen/PincodeLoginScreen";
+
+import { AiFillAlert, AiFillCloseCircle, AiFillAudio } from "react-icons/ai";
+import LoginScreen from "./screen/LoginScreen";
 
 function App() {
   return (
-    <div className="App container">
+    <div className="App container pt-5">
+
+      {/* <LoginScreen/> */}
+
+
       {/* <PincodeLoginScreen/> */}
-      <ModalConfirm bodyText="Etes vous certain de vouloir supprimer cette ligne ?" buttonPosition="" TextIcon={AiFillAlert}/>
+      <ModalConfirm
+        headerText="Message"
+        LeftIcon={AiFillAlert}
+        RightIcon={AiFillCloseCircle}
+        messageText="Supprimer cette ligne ?"
+        MessageIcon={AiFillAudio }
+        ConfirmButtonIcon = {AiFillAlert}
+        // leftIconClass="text-info"
+        // rightIconClass="text-success"
+        // Separator={null}
+      />
     </div>
   );
 }

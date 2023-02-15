@@ -1,57 +1,124 @@
-import "./ModalConfirm.css";
+import styles from "./ModalConfirm.module.css";
 function ModalConfirm(props) {
   const {
-    modalClass = "",
-    modalStyle = {},
-    headerText = null,
+    containerClass = "",
+    containerStyle = {},
     headerClass = "",
     headerStyle = {},
-    bodyText = null,
-    //class, style
-    bodyClass = "",
-    bodyStyle = {},
-    footerText = null,
-    footerClass = "",
-    footerStyle = {},
-    yesButtonText = "✓",
-    //class, style
-    noButtonText = "✗",
-    //class, style
-    buttonPosition = "", // after|bottom + buttonSpacing""|left|right
-    buttonGrouping = "",
-    YesIcon,
-    NoIcon,
-    TextIcon
-  } = props;
+    headerText = "",
+    headerTextClass = "",
+    headerTextStyle = null,
+    LeftIcon = null,
+    leftIconClass = "",
+    leftIconStyle = null,
+    RightIcon = null,
+    rightIconClass = "",
+    rightIconStyle = null,
 
+    Separator = () => {
+      return <hr style={{ margin: "0px" }} />;
+    },
+
+    bodyClass = "",
+    bodyStyle = null,
+    stackedButtons = false,
+    bottomButtons = true,
+
+    messageText = "",
+    messageTextClass = "",
+    messageTextStyle = {},
+    MessageIcon = null,
+    messageIconClass = "",
+    messageIconStyle = {},
+
+    buttonsContainerClass = "",
+    buttonsContainerStyle = {},
+
+    confirmButtonText = "Oui",
+    confirmButtonTooltip = "",
+    ConfirmButtonIcon = null,
+    confirmButtonClass = "",
+    confirmButtonStyle = {},
+
+    cancelButtonText = "Non",
+    cancelButtonTooltip = "",
+    CancelButtonIcon = null,
+    cancelButtonClass = "",
+    cancelButtonStyle = {},
+
+    onConfirm = () => {},
+    onCancel = () => {},
+
+  } = props;
   return (
-    <div className={"modal-container" + modalClass} style={ modalStyle }>
-      {headerText != null && (
-        <div className={"modal-header " + headerClass} style={ headerStyle }>
-          {headerText}
-        </div>
-      )}
-      {bodyText != null && ( 
+    <div
+      className={`${styles.modalConfirm} ${containerClass}`}
+      style={containerStyle}
+    >
+      <div
+        className={`${styles.modalHeader} ${headerClass}`}
+        style={headerStyle}
+      >
+        {LeftIcon && (
+          <div
+            className={`${styles.leftIcon} ${leftIconClass}`}
+            style={leftIconStyle}
+          >
+            {<LeftIcon/>}
+          </div>
+        )}
+        {headerText && (
+          <div
+            className={`${styles.headerText} ${headerTextClass}`}
+            style={headerTextStyle}
+          >
+            {headerText}
+          </div>
+        )}
+        {RightIcon && (
+          <div
+            className={`${styles.rightIcon} ${rightIconClass}`}
+            style={rightIconStyle}
+          >
+            {<RightIcon/>}
+          </div>
+        )}
+      </div>
+      {Separator && <Separator />}
+      <div
+        className={`${styles.modalBody} ${
+          bottomButtons && styles.bottom
+        } ${bodyClass}`}
+        style={bodyStyle}
+      >
         <div
-          className={`modal-body ${buttonPosition} ${bodyClass}`}
-          style={ bodyStyle }
+          className={`${styles.messageText} ${messageTextClass}`}
+          style={messageTextStyle}
         >
-            
-          <div className={"modal-body-text "}>
-            {TextIcon && <span className=""><TextIcon/></span>} {bodyText}
-            {/* //TODO Revoir Icon Position */}
-          </div>
-          <div className={"modal-body-buttons "}>
-              <button className="yes-button">{yesButtonText}</button>
-              <button className="no-button">{noButtonText}</button>
-          </div>
+          <span className="me-1">
+            {MessageIcon != null && <MessageIcon/> }
+          </span>
+
+          {/*TODO class style ... */ }
+          <span>{messageText}</span>
         </div>
-      )}
-      {footerText != null && (
-        <div className={"modal-footer " + footerClass} style={ footerStyle }>
-          {footerText}
+        <div
+          className={`${styles.buttonsContainer} ${
+            stackedButtons && styles.stacked
+          } ${buttonsContainerClass}`}
+          style={buttonsContainerStyle}
+        >
+          <button title={cancelButtonTooltip}>
+            <span></span>
+            {cancelButtonText}
+          </button>
+          <button title={confirmButtonTooltip}>
+            <span>{ConfirmButtonIcon && <ConfirmButtonIcon/>}</span>
+            {confirmButtonText}
+          </button>
         </div>
-      )}
+        
+      </div>
     </div>
   );
 }

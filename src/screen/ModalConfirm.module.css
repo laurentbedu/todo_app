@@ -1,0 +1,64 @@
+.modalConfirm{
+    padding: 3px;
+    border: 2px solid black;
+    border-radius: 0.33rem;
+    color:#111;
+    background-color: #eee;
+}
+
+.modalHeader{
+    display: flex;
+    /* align-items:center; */
+    padding: 6px;
+}
+
+.modalHeader svg{
+    font-size: 1.5rem;
+    /* margin-top:2px; */
+}
+
+.leftIcon{
+
+}
+.headerText{
+    margin: 0px 6px;
+    font-size: 1.33rem;
+    font-weight: bold;
+}
+.rightIcon{
+    margin-left: auto;
+}
+
+.modalBody{
+    display: flex;
+    padding: 6px;
+}
+.modalBody.bottom{
+    flex-direction: column;
+}
+.modalBody.bottom .buttonsContainer{
+    justify-content: space-between;
+    margin-left: 0px;
+    margin-top: 6px;
+}
+.modalBody.bottom .buttonsContainer button{
+    margin-left: 0px;
+}
+
+.messageText{
+
+}
+
+.buttonsContainer{
+    display: flex;
+    margin-left: auto;
+}
+.buttonsContainer.stacked{
+    flex-direction: column;
+}
+.buttonsContainer button{
+    margin-left: 3px;
+}
+.buttonsContainer.stacked button{
+    margin-top: 3px;
+}
