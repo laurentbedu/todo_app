@@ -1,5 +1,8 @@
+import useLocalStorage from "../hooks/useLocalStorage";
+
 function LoginScreen(props) {
-    
+  const [auth, setAuth] = useLocalStorage("auth", null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -13,13 +16,23 @@ function LoginScreen(props) {
       },
       body,
     })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(err => console.log(err));
+      .then((resp) => resp.json())
+      .then((json) => {
+        console.log(json);
+        setAuth(json.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleLogout = (e) => {
+    setAuth(null);
   };
 
   return (
     <>
+      <button className="btn btn-primary" onClick={handleLogout}>
+        Logout
+      </button>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">

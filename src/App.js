@@ -12,11 +12,11 @@ function App() {
   return (
     <div className="App container pt-5">
 
-      {/* <LoginScreen/> */}
+      <LoginScreen/>
 
 
       {/* <PincodeLoginScreen/> */}
-      <ModalConfirm
+      {/* <ModalConfirm
         headerText="Message"
         LeftIcon={AiFillAlert}
         RightIcon={AiFillCloseCircle}
@@ -26,7 +26,7 @@ function App() {
         // leftIconClass="text-info"
         // rightIconClass="text-success"
         // Separator={null}
-      />
+      /> */}
     </div>
   );
 }
