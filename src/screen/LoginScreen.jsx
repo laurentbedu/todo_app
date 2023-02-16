@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { AuthContext } from "../contexts/AuthContext";
+import useCookie from "../hooks/useCookie";
 
 function LoginScreen(props) {
-  const [auth, setAuth] = useLocalStorage("auth", null);
+  //const [auth, setAuth] = useLocalStorage("auth", null);
+  const {auth, setAuth} = useContext(AuthContext);
+  const [authCookie, setAuthCookie] = useCookie("auth");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,46 +25,52 @@ function LoginScreen(props) {
       .then((json) => {
         console.log(json);
         setAuth(json.data);
+        setAuthCookie(json.token ?? null, {"max-age":`${60*60*24}`});
       })
       .catch((err) => console.log(err));
   };
 
   const handleLogout = (e) => {
     setAuth(null);
+    setAuthCookie(null);
   };
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleLogout}>
-        Logout
-      </button>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            className="form-control"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="pincode" className="form-label">
-            Pincode
-          </label>
-          <input
-            id="pincode"
-            name="pincode"
-            type="text"
-            className="form-control"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Login
+      {auth && (
+        <button className="btn btn-primary" onClick={handleLogout}>
+          Logout
         </button>
-      </form>
+      )}
+      {!auth && (
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="form-control"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="pincode" className="form-label">
+              Pincode
+            </label>
+            <input
+              id="pincode"
+              name="pincode"
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+        </form>
+      )}
     </>
   );
 }
